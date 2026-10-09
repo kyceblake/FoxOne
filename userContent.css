@@ -74,8 +74,8 @@
 @-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
   @media (prefers-color-scheme: dark) {
     :root {
-      --newtab-background-color: #282828 !important;
-      --newtab-text-primary-color: #FFFFFF !important;
+      --newtab-background-color: #0e0e0e !important;
+      --newtab-text-primary-color: #c4d0db !important;
     }
   }
 }
@@ -92,23 +92,23 @@
    ========================================================================== */
 
 :root {
-  --uc-color-base:    #282828;
-  --uc-color-surface: #3c3836;
-  --uc-color-accent:  #fabd2f;
-  --uc-color-text:    #FFFFFF;
-  --uc-color-hover:   #7c6f64;
-  --uc-color-border:  #504945;   /* Gruvbox bg2, neutral control hairline */
-  --uc-tab-hover-text: #ffda85;   /* tab title hover, between text and accent */
+  --uc-color-base:    #0e0e0e;
+  --uc-color-surface: #000000;
+  --uc-color-accent:  #5f9bb0;
+  --uc-color-text:    #c4d0db;
+  --uc-color-hover:   #1c344b;
+  --uc-color-border:  #303030;   /* Gruvbox bg2, neutral control hairline */
+  --uc-tab-hover-text: #8eb4c5;   /* tab title hover, between text and accent */
 }
 @media (prefers-color-scheme: light) {
   :root {
-    --uc-color-base:    #fbf1c7;
-    --uc-color-surface: #ebdbb2;
-    --uc-color-accent:  #b57614;
-    --uc-color-text:    #3c3836;
-    --uc-color-hover:   #bdae93;
-    --uc-color-border:  #d5c4a1;
-    --uc-tab-hover-text: #855d22;
+    --uc-color-base:    #0e0e0e;
+    --uc-color-surface: #000000;
+    --uc-color-accent:  #5f9bb0;
+    --uc-color-text:    #c4d0db;
+    --uc-color-hover:   #1c344b;
+    --uc-color-border:  #303030;
+    --uc-tab-hover-text: #8eb4c5;
   }
 }
 
@@ -217,8 +217,8 @@
     /* Base in every state: with the cards flat on the canvas, any lighter
        field (at rest or focused) was the one raised surface left on the
        page. The accent border carries the focus cue. */
-    background-color: var(--uc-color-base, #282828) !important;
-    color: var(--uc-color-text, #FFFFFF) !important;
+    background-color: var(--uc-color-base, #0e0e0e) !important;
+    color: var(--uc-color-text, #c4d0db) !important;
   }
 
   /* Corner radius, driven by --uc-radius-surface (the --uc-rounded toggle
@@ -333,8 +333,8 @@
 @-moz-document url-prefix("about:downloads") {
   #downloadsListBox:focus > richlistitem[selected] {
     background-image: none !important;
-    background-color: var(--in-content-item-selected, #fabd2f) !important;
-    color: var(--in-content-item-selected-text, #282828) !important;
+    background-color: var(--in-content-item-selected, #5f9bb0) !important;
+    color: var(--in-content-item-selected-text, #0e0e0e) !important;
     outline: none !important;
   }
 }
@@ -540,3 +540,4 @@ html[mozdisallowselectionprint] .editToolbar {
 html[mozdisallowselectionprint] .toolbarButton.labeled {
   --doorhanger-hover-color: var(--uc-tab-hover-text) !important;
 }
+

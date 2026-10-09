@@ -22,26 +22,26 @@
      - The tab hover colour is separate: --uc-tab-hover-text and
        --uc-light-tab-hover-text, further down in this block.
      - A few rules cannot read variables and hold literals: the accent
-       (#fabd2f dark / #b57614 light) on the sidebar's selected rows and in
-       the Library window, the field ground (#1f1f1f / #f9f5d7) on the
+       (#5f9bb0 dark / #5f9bb0 light) on the sidebar's selected rows and in
+       the Library window, the field ground (#000000 / #000000) on the
        sidebar search boxes. Search this file for those hex values. */
-  --uc-color-base:    #282828;   /* main background (toolbar, frame) */
-  --uc-color-surface: #3c3836;   /* secondary tone (borders, separators, focused URL field) */
-  --uc-color-accent:  #fabd2f;   /* accent color (active tab, focus ring) */
-  --uc-color-text:    #FFFFFF;   /* primary text */
-  --uc-color-hover:   #7c6f64;   /* hover / highlight backgrounds */
+  --uc-color-base:    #0e0e0e;   /* main background (toolbar, frame) */
+  --uc-color-surface: #000000;   /* secondary tone (borders, separators, focused URL field) */
+  --uc-color-accent:  #5f9bb0;   /* accent color (active tab, focus ring) */
+  --uc-color-text:    #c4d0db;   /* primary text */
+  --uc-color-hover:   #1c344b;   /* hover / highlight backgrounds */
 
   /* Light palette (Gruvbox Light) – used instead of the five above whenever
      Firefox runs a light colour scheme: about:addons → Themes → "Hell", the
      built-in "Hell" theme, or "System" on a light OS. Same roles. The accent
-     is Gruvbox Light's own yellow, not #fabd2f: FoxOne uses the accent as a
+     is Gruvbox Light's own yellow, not #5f9bb0: FoxOne uses the accent as a
      TEXT colour (hover, selected tab, links), and bright amber on a light
      ground is unreadable. */
-  --uc-light-color-base:    #fbf1c7;
-  --uc-light-color-surface: #ebdbb2;
-  --uc-light-color-accent:  #b57614;
-  --uc-light-color-text:    #3c3836;
-  --uc-light-color-hover:   #bdae93;
+  --uc-light-color-base:    #0e0e0e;
+  --uc-light-color-surface: #000000;
+  --uc-light-color-accent:  #5f9bb0;
+  --uc-light-color-text:    #c4d0db;
+  --uc-light-color-hover:   #1c344b;
 
   /* Corner radius for the surfaces FoxOne owns (tab-group chips, library
      search field) and the value handed to every surface the rounded-corners
@@ -61,8 +61,8 @@
   /* URL Bar width (min applied normally, max on focus). The px ceiling caps
      growth on ultrawide/4K, where bare vw scales to absurd widths (issue #6).
      Caps engage from ~1800px CSS-px viewport; below that the vw value wins. */
-  --uc-urlbar-min-width: min(35vw, 630px);
-  --uc-urlbar-max-width: min(50vw, 900px);
+  --uc-urlbar-min-width: min(28vw, 504px);
+  --uc-urlbar-max-width: min(40vw, 720px);
 
   /* Dynamic tab widths. The inactive ceiling is intentionally lower than the
      active one: inactive tabs cap sooner, freeing strip space for the active
@@ -81,8 +81,8 @@
 
   /* Inactive tab hover title color (issue #16). Sits between text and accent:
      lighter amber on dark, darker amber on light. */
-  --uc-tab-hover-text: #ffda85;
-  --uc-light-tab-hover-text: #855d22;
+  --uc-tab-hover-text: #8eb4c5;
+  --uc-light-tab-hover-text: #8eb4c5;
 
   /* Container tab indicator line (0 = bottom edge, 1 = top) */
   --uc-container-line-top: 1;
@@ -327,19 +327,19 @@
    on :root. Author !important rules beat those inline values, so FoxOne's
    forced surface colours used to override extensions like Adaptive Tab Bar
    Colour, which retints the chrome to match each page. The surface overrides
-   below are therefore scoped to :root:not([lwtheme]): when any dynamic theme
+   below are therefore scoped to :root: when any dynamic theme
    is active FoxOne steps back and lets it drive frame, toolbar, URL field,
    popups and sidebar. The accent/identity cues stay unconditional so FoxOne
    remains recognisable, and a small :root[lwtheme] block keeps FoxOne's own
    helper tokens following the theme instead of drifting to Nova defaults.
    FoxOne itself sets no lightweight theme, so without such an extension
-   :root:not([lwtheme]) always matches and behaviour is unchanged.
+   :root always matches and behaviour is unchanged.
    (Firefox sets lwtheme="" on the root; the old :-moz-lwtheme pseudo-class
    was removed, so attribute selectors are the way now.)
    ---------------------------------------------------------------------- */
 
 /* Chrome surfaces – yielded to a dynamic theme when one is active */
-:root:not([lwtheme]) {
+:root {
   /* Frame & toolbar */
   --lwt-accent-color: var(--uc-color-base) !important;
   --toolbar-bgcolor: var(--uc-color-base) !important;
@@ -413,10 +413,10 @@
 
    A handful of Nova tokens reference the violet palette DIRECTLY, past
    the accent tokens; those are repointed individually below. Scoped
-   :root:not([lwtheme]) like the other surface colours: a dynamic theme
+   :root like the other surface colours: a dynamic theme
    keeps its own accents. Inert without Nova (pre-Nova builds simply get
    amber instead of the old cyan accent, which is on-brand anyway). */
-:root:not([lwtheme]) {
+:root {
   /* The central lever: the semantic accent family. */
   --color-accent-primary: var(--uc-color-accent) !important;
   --color-accent-primary-hover: var(--uc-color-accent) !important;
@@ -465,7 +465,7 @@
    --panel-background-color value and 100% radius makes it round, so any
    !important override here flattens it to a plain square.
    ---------------------------------------------------------------------- */
-:root:not([lwtheme]) :is(panel, menupopup):not(#DateTimePickerPanel, .autoscroller) {
+:root :is(panel, menupopup):not(#DateTimePickerPanel, .autoscroller) {
   --panel-background-color: var(--uc-color-base) !important;
   --panel-text-color: var(--uc-color-text) !important;
   --panel-border-color: var(--uc-color-surface) !important;
@@ -597,7 +597,7 @@ menupopup :is(menuitem, menu)[_moz-menuactive][disabled] {
 }
 /* Navigation row (back/forward/reload/bookmark icons): a disabled arrow
    answers hover with the hover yellow at disabled strength, mirroring a
-   disabled toolbar button (#ffda85 under the native 0.4 opacity). Text
+   disabled toolbar button (#8eb4c5 under the native 0.4 opacity). Text
    menuitems keep their native GrayText and are not touched. */
 #context-navigation > menuitem[_moz-menuactive][disabled] {
   color: color-mix(in srgb, var(--uc-tab-hover-text) 40%, transparent) !important;
@@ -627,7 +627,7 @@ menupopup :is(menuitem, menu)[_moz-menuactive][disabled] {
 /* Toolbox background – forced to base only when no dynamic theme is active;
    otherwise Firefox paints it from the theme frame colour. The per-theme
    surface collapse lives in its own block – see DYNAMIC-THEME COMPAT. */
-:root:not([lwtheme]) #navigator-toolbox {
+:root #navigator-toolbox {
   background: var(--uc-color-base) !important;
 }
 
@@ -660,12 +660,12 @@ menupopup :is(menuitem, menu)[_moz-menuactive][disabled] {
    the dropdown looks the same either way. Same :not([selected]) scope as
    the native rule: the selected row's URL follows the accent title. */
 .urlbarView-row:not([selected]) :is(.urlbarView-url, .urlbarView-explanation) {
-  color: #00cadb !important;
+  color: #5f9bb0 !important;
 }
 /* Cyan washes out on the light ground; Gruvbox Light's blue takes the role. */
 @media (prefers-color-scheme: light) {
   .urlbarView-row:not([selected]) :is(.urlbarView-url, .urlbarView-explanation) {
-    color: #076678 !important;
+    color: #5f9bb0 !important;
   }
 }
 
@@ -838,7 +838,7 @@ sidebar-main,
    the navbar. Pin it to base when no dynamic theme is active; under one (e.g.
    Adaptive Tab Bar Colour) follow --toolbar-bgcolor like the rest of the
    chrome so it retints with the page (issue #5). */
-:root:not([lwtheme]) #PersonalToolbar {
+:root #PersonalToolbar {
   background-color: var(--uc-color-base) !important;
 }
 :root[lwtheme] #PersonalToolbar {
@@ -1145,7 +1145,7 @@ sidebar-main,
 /* Toolbox fill is the frame tone (base), NOT the URL-field colour. Feeding
    --toolbar-field-background-color in here leaked the field colour onto the
    whole top panel (issue #28); the field itself is painted at #urlbar below. */
-:root:not([lwtheme]) #navigator-toolbox {
+:root #navigator-toolbox {
   background: var(--uc-color-base) !important;
 }
 
@@ -1489,7 +1489,7 @@ sidebar-main,
 
 /* ==========================================================================
    ICON COLOURING – hover/active feedback by fill, not by background.
-   Mirrors the tab-title model (issue #16): inactive white, hover #ffda85,
+   Mirrors the tab-title model (issue #16): inactive white, hover #8eb4c5,
    active/open the accent. Colour is the sole interaction signal, so there is
    no hover chip and no square/round inconsistency left to chase. The bookmark
    star (native amber-when-set logic) and the window controls stay untouched.
@@ -1515,7 +1515,7 @@ sidebar-main,
   --toolbarbutton-icon-fill: var(--uc-tab-hover-text) !important;
 }
 #nav-bar .toolbarbutton-1:is(:active, [open]) {
-  --toolbarbutton-icon-fill: var(--tab-selected-textcolor, #fabd2f) !important;
+  --toolbarbutton-icon-fill: var(--tab-selected-textcolor, #5f9bb0) !important;
 }
 
 /* The new-tab "+" lives in the tab strip, not #nav-bar, so the rules above
@@ -1531,7 +1531,7 @@ sidebar-main,
   --toolbarbutton-icon-fill: var(--uc-tab-hover-text) !important;
 }
 :is(#tabs-newtab-button, #new-tab-button):is(:active, [open]) {
-  --toolbarbutton-icon-fill: var(--tab-selected-textcolor, #fabd2f) !important;
+  --toolbarbutton-icon-fill: var(--tab-selected-textcolor, #5f9bb0) !important;
 }
 
 /* Bookmarks-bar overflow chevron (">>"): lives in #PersonalToolbar, so the
@@ -1572,7 +1572,7 @@ sidebar-main,
 }
 #urlbar .urlbar-icon:not(#star-button):is(:active, [open]),
 #urlbar .urlbar-page-action:is(:active, [open]) .urlbar-icon {
-  fill: var(--tab-selected-textcolor, #fabd2f) !important;
+  fill: var(--tab-selected-textcolor, #5f9bb0) !important;
 }
 
 /* Shield (tracking protection) and the site-info/settings icon use their own
@@ -1588,8 +1588,8 @@ sidebar-main,
 #tracking-protection-icon-container:is(:active, [open]) #tracking-protection-icon,
 #trust-icon-container:is(:active, [open]) #trust-icon,
 #urlbar .identity-box-button:is(:active, [open]) {
-  fill: var(--tab-selected-textcolor, #fabd2f) !important;
-  color: var(--tab-selected-textcolor, #fabd2f) !important;
+  fill: var(--tab-selected-textcolor, #5f9bb0) !important;
+  color: var(--tab-selected-textcolor, #5f9bb0) !important;
 }
 
 
@@ -1597,7 +1597,7 @@ sidebar-main,
    BOOKMARKS BAR – colour-as-signal, same model as the icons above and the
    tab titles (issue #16). Drop the native hover/active chip on each bookmark
    so the title text alone signals the interaction: inactive native white,
-   hover #ffda85, active press or open folder the accent. The favicon is a
+   hover #8eb4c5, active press or open folder the accent. The favicon is a
    real image, not a recolourable mask, so it stays native – like a tab, the
    icon sits left and the title carries the colour. Scoped to #PersonalToolbar
    so bookmarks in menus and the sidebar keep their native behaviour.
@@ -1612,7 +1612,7 @@ sidebar-main,
 }
 #PersonalToolbar .bookmark-item:is(:active, [open]) {
   background-color: transparent !important;
-  color: var(--tab-selected-textcolor, #fabd2f) !important;
+  color: var(--tab-selected-textcolor, #5f9bb0) !important;
 }
 
 
@@ -1639,8 +1639,8 @@ sidebar-main,
   left: 10px !important;
   right: 10px !important;
   height: 1px !important;
-  background: var(--tab-selected-textcolor, #fabd2f) !important;
-  box-shadow: 0 1px 10px 1px var(--tab-selected-textcolor, #fabd2f) !important;
+  background: var(--tab-selected-textcolor, #5f9bb0) !important;
+  box-shadow: 0 1px 10px 1px var(--tab-selected-textcolor, #5f9bb0) !important;
   transform-origin: left !important;
   transform: scaleX(0);
   opacity: 0 !important;
@@ -1657,8 +1657,8 @@ sidebar-main,
 
 /* Inactive busy tabs – white to match tab text color */
 .tabbrowser-tab[busy]:not([selected], [pinned]) .tab-background::before {
-  background: var(--toolbar-color, #FFFFFF) !important;
-  box-shadow: 0 1px 10px 1px var(--toolbar-color, #FFFFFF) !important;
+  background: var(--toolbar-color, #c4d0db) !important;
+  box-shadow: 0 1px 10px 1px var(--toolbar-color, #c4d0db) !important;
 }
 
 /* Top glow – busy tabs (pinned excluded: their ::after is the indicator) */
@@ -1670,8 +1670,8 @@ sidebar-main,
   left: 10px !important;
   right: 10px !important;
   height: 1px !important;
-  background: var(--tab-selected-textcolor, #fabd2f) !important;
-  box-shadow: 0 1px 10px 1px var(--tab-selected-textcolor, #fabd2f) !important;
+  background: var(--tab-selected-textcolor, #5f9bb0) !important;
+  box-shadow: 0 1px 10px 1px var(--tab-selected-textcolor, #5f9bb0) !important;
   transform-origin: left !important;
   opacity: var(--uc-show-loading-progress) !important;
   animation: uc-progress 2.5s cubic-bezier(0.2, 0.6, 0.4, 1) forwards !important;
@@ -1680,8 +1680,8 @@ sidebar-main,
 
 /* Top glow – inactive tabs use white */
 .tabbrowser-tab[busy]:not([selected], [pinned]) .tab-background::after {
-  background: var(--toolbar-color, #FFFFFF) !important;
-  box-shadow: 0 1px 10px 1px var(--toolbar-color, #FFFFFF) !important;
+  background: var(--toolbar-color, #c4d0db) !important;
+  box-shadow: 0 1px 10px 1px var(--toolbar-color, #c4d0db) !important;
 }
 
 @keyframes uc-progress {
@@ -1797,41 +1797,41 @@ sidebar-main {
    chrome pages under chrome://browser/content/sidebar/, same mechanic as the
    genai block below. Their "Chronik/Tabs durchsuchen" boxes are
    moz-input-search widgets in shadow roots; the background token inherits
-   through. #1f1f1f: FoxOne's compiled-in field dark (matches the in-content
+   through. #000000: FoxOne's compiled-in field dark (matches the in-content
    standins), deliberately darker than base. */
 @-moz-document url-prefix(chrome://browser/content/sidebar/) {
   /* Search boxes ("Chronik/Lesezeichen/Tabs durchsuchen"). The
      --input-text-background-color token is redefined on :host INSIDE the
      widget shadow roots, so an inherited :root override never arrives.
      userChrome.css is a USER sheet and user sheets match inside shadow
-     trees – style the input directly. #1f1f1f: FoxOne's compiled-in field
+     trees – style the input directly. #000000: FoxOne's compiled-in field
      dark (matches the in-content standins). */
   input[type="search"] {
-    background-color: #1f1f1f !important;
+    background-color: #000000 !important;
   }
 
   /* Selected row (bookmarks, history, synced/open tabs) – native paints
      --button-background-color-primary, which resolves to the OS accent
      (cyan block). Selection follows the FoxOne model instead: no
      background block, accent text. Rules pierce into the list shadow
-     trees for the same user-sheet reason as above; #fabd2f =
+     trees for the same user-sheet reason as above; #5f9bb0 =
      --uc-color-accent (tokens don't reach here either). */
   sidebar-tab-row[selected],
   sidebar-bookmark-row[selected] {
     background-color: transparent !important;
-    color: #fabd2f !important;
+    color: #5f9bb0 !important;
   }
 
   /* Light scheme: the same two literals from the light palette. Field
-     #f9f5d7 is Gruvbox Light's hard-contrast ground, a shade off base like
-     #1f1f1f is in dark; #b57614 = --uc-light-color-accent. */
+     #000000 is Gruvbox Light's hard-contrast ground, a shade off base like
+     #000000 is in dark; #5f9bb0 = --uc-light-color-accent. */
   @media (prefers-color-scheme: light) {
     input[type="search"] {
-      background-color: #f9f5d7 !important;
+      background-color: #000000 !important;
     }
     sidebar-tab-row[selected],
     sidebar-bookmark-row[selected] {
-      color: #b57614 !important;
+      color: #5f9bb0 !important;
     }
   }
 }
@@ -1841,12 +1841,12 @@ sidebar-main {
    never reaches it. Its search box is a modern moz-input-search though, so
    the same shadow-piercing input rule works; the selection is a XUL tree
    like the Library: FoxOne model via ::-moz-tree pseudos, hardcoded
-   #fabd2f = --uc-color-accent (tree pseudos cannot read variables),
-   with the light-palette twins (#f9f5d7 field, #b57614 accent) in the
+   #5f9bb0 = --uc-color-accent (tree pseudos cannot read variables),
+   with the light-palette twins (#000000 field, #5f9bb0 accent) in the
    light-scheme block, same split as the Library block. */
 @-moz-document url("chrome://browser/content/places/bookmarksSidebar.xhtml") {
   input[type="search"] {
-    background-color: #1f1f1f !important;
+    background-color: #000000 !important;
   }
 
   treechildren::-moz-tree-row(selected),
@@ -1856,28 +1856,28 @@ sidebar-main {
   }
   treechildren::-moz-tree-cell-text(selected),
   treechildren::-moz-tree-cell-text(selected, focus) {
-    color: #fabd2f !important;
+    color: #5f9bb0 !important;
   }
   treechildren::-moz-tree-image(selected),
   treechildren::-moz-tree-image(selected, focus),
   treechildren::-moz-tree-twisty(selected),
   treechildren::-moz-tree-twisty(selected, focus) {
-    fill: #fabd2f !important;
+    fill: #5f9bb0 !important;
   }
 
   @media (prefers-color-scheme: light) {
     input[type="search"] {
-      background-color: #f9f5d7 !important;
+      background-color: #000000 !important;
     }
     treechildren::-moz-tree-cell-text(selected),
     treechildren::-moz-tree-cell-text(selected, focus) {
-      color: #b57614 !important;
+      color: #5f9bb0 !important;
     }
     treechildren::-moz-tree-image(selected),
     treechildren::-moz-tree-image(selected, focus),
     treechildren::-moz-tree-twisty(selected),
     treechildren::-moz-tree-twisty(selected, focus) {
-      fill: #b57614 !important;
+      fill: #5f9bb0 !important;
     }
   }
 }
@@ -1886,11 +1886,11 @@ sidebar-main {
 /* Tab-modal dialogs in the browser window (Ctrl+Shift+Del clear data, and
    every other window-modal subdialog): the frame is a .dialogBox in
    browser.xhtml, painted from --background-color-box (Nova's violet-tinted
-   dark) with --border-radius-medium. Colour scoped :root:not([lwtheme])
+   dark) with --border-radius-medium. Colour scoped :root
    like the other surfaces, the shape always applies (same split as the
    popup blocks). The in-preferences variant of the same dialogs is themed
    from userContent.css. */
-:root:not([lwtheme]) .dialogBox {
+:root .dialogBox {
   --background-color-box: var(--uc-color-base) !important;
   --background-color-canvas: var(--uc-color-base) !important;
   --card-border-color: var(--uc-color-surface) !important;
@@ -2574,7 +2574,7 @@ sidebar-main {
   color: var(--uc-tab-hover-text) !important;
 }
 .tabbrowser-tab:not([pinned]) .tab-close-button:hover:active {
-  color: var(--tab-selected-textcolor, #fabd2f) !important;
+  color: var(--tab-selected-textcolor, #5f9bb0) !important;
 }
 
 /* adaptive tab width */
@@ -2588,17 +2588,10 @@ sidebar-main {
   min-width: var(--uc-tab-min-width) !important;
 }
 
-/* active pinned tab – bottom glow indicator (mirrors container-line style) */
+/* Selected pinned tabs use the shared background and underline. */
 .tabbrowser-tab[pinned][selected] .tab-background::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 10px !important;
-  right: 10px !important;
-  height: 1px !important;
-  background: var(--tab-selected-textcolor, #fabd2f) !important;
-  box-shadow: 0 -1px 10px 1px var(--tab-selected-textcolor, #fabd2f) !important;
+  content: none !important;
+  display: none !important;
 }
 
 /* container tabs indicator (position toggle in CONFIG)
@@ -2996,7 +2989,7 @@ label.found-matches {
 }
 
 /* Colour-as-signal instead of the old background chip: hover dims toward
-   #ffda85, an active option holds the accent. Matches the toolbar-icon and
+   #8eb4c5, an active option holds the accent. Matches the toolbar-icon and
    tab-title model since 3.3.3. */
 .findbar-container > checkbox:not([checked]):hover {
   background-color: transparent !important;
@@ -3113,8 +3106,8 @@ html[id^="taskbartab"] #unified-extensions-button {
    Both panes (folder tree left, item list right) are XUL <tree>s and are
    only styleable through ::-moz-tree-* pseudo-elements. Those CANNOT read
    CSS variables – the palette values are hardcoded here on purpose:
-   #fabd2f = --uc-color-accent. Retheming means touching this block too.
-   The light scheme gets the same pseudos with #b57614 =
+   #5f9bb0 = --uc-color-accent. Retheming means touching this block too.
+   The light scheme gets the same pseudos with #5f9bb0 =
    --uc-light-color-accent (block right after the hover rule); everything
    past the pseudos is regular XUL and follows the palette swap on its own.
 
@@ -3135,14 +3128,14 @@ html[id^="taskbartab"] #unified-extensions-button {
   }
   treechildren::-moz-tree-cell-text(selected),
   treechildren::-moz-tree-cell-text(selected, focus) {
-    color: #fabd2f !important;
+    color: #5f9bb0 !important;
   }
   /* Folder/page icons and twisties are context-fill – follow the text. */
   treechildren::-moz-tree-image(selected),
   treechildren::-moz-tree-image(selected, focus),
   treechildren::-moz-tree-twisty(selected),
   treechildren::-moz-tree-twisty(selected, focus) {
-    fill: #fabd2f !important;
+    fill: #5f9bb0 !important;
   }
 
   /* Keyboard-cursor dashed ring: redundant next to the amber text
@@ -3158,22 +3151,22 @@ html[id^="taskbartab"] #unified-extensions-button {
   /* Hover – accent frame, no fill. */
   treechildren::-moz-tree-row(hover) {
     background-color: transparent !important;
-    border: 1px solid #fabd2f !important;
+    border: 1px solid #5f9bb0 !important;
   }
 
   @media (prefers-color-scheme: light) {
     treechildren::-moz-tree-cell-text(selected),
     treechildren::-moz-tree-cell-text(selected, focus) {
-      color: #b57614 !important;
+      color: #5f9bb0 !important;
     }
     treechildren::-moz-tree-image(selected),
     treechildren::-moz-tree-image(selected, focus),
     treechildren::-moz-tree-twisty(selected),
     treechildren::-moz-tree-twisty(selected, focus) {
-      fill: #b57614 !important;
+      fill: #5f9bb0 !important;
     }
     treechildren::-moz-tree-row(hover) {
-      border-color: #b57614 !important;
+      border-color: #5f9bb0 !important;
     }
   }
 
@@ -3421,5 +3414,61 @@ html[id^="taskbartab"] #unified-extensions-button {
   .tabbrowser-tab[busy] .tab-background::after {
     animation: none !important;
     transform: scaleX(1) !important;
+  }
+}
+
+
+/* Hide address-bar search-engine selector. */
+#urlbar-searchmode-switcher,
+.searchmode-switcher {
+  display: none !important;
+}
+
+/* Hide address-bar translate, pop-out video, and bookmark buttons. */
+#urlbar #translations-button,
+#urlbar #picture-in-picture-button,
+#urlbar #star-button-box {
+  display: none !important;
+}
+
+/* Shared foot / labwc / Neovim palette: control borders. */
+:root {
+  --panel-border-color: #303030 !important;
+  --lwt-sidebar-border-color: #303030 !important;
+}
+
+/* Selected tab: muted blue background with a matching accent underline. */
+.tabbrowser-tab[selected] > .tab-stack > .tab-background {
+  background: var(--uc-color-hover) !important;
+  box-shadow: inset 0 -2px 0 var(--uc-color-accent) !important;
+}
+
+/* Narrow windows: give tabs and the address bar their own rows. */
+@media (max-width: 700px) {
+  :root:has(#tabbrowser-tabs[orient="horizontal"]) #titlebar,
+  :root:has(#tabbrowser-tabs[orient="horizontal"]) #TabsToolbar {
+    order: 0 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    transition: none !important;
+  }
+
+  :root:has(#tabbrowser-tabs[orient="horizontal"]) #nav-bar {
+    order: 1 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    transition: none !important;
+  }
+
+  #tabbrowser-tabs[orient="horizontal"] {
+    max-width: calc(100% - var(--uc-hamburger-width) - var(--uc-newtab-width)
+      - var(--uc-extensions-button-width) * var(--uc-extensions-button-right)) !important;
+    flex-grow: 1 !important;
+  }
+
+  /* Native pinned-tab sizing reserves 300px for the one-row toolbar. */
+  #pinned-tabs-container[orient="horizontal"] {
+    max-width: 100% !important;
+    flex: 0 1 auto !important;
   }
 }
