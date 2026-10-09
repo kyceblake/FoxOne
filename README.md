@@ -1,10 +1,17 @@
 # FoxOne
 
-One-line layout, hover-reveal icons, dynamic bookmarks bar, floating Findbar, Gruvbox colors and ready for **Nova**
+Kyle's fork: a dark blue and teal palette, shorter URL bar, and clearer selected tabs. Based on [Firnschnee/FoxOne](https://github.com/Firnschnee/FoxOne).
 
 > Tested with Firefox 157 on Windows, macOS, and Linux (GNOME & KDE) with `browser.nova.enabled` set to `true`
 
-![urlbar](assets/preview_cropped.png)
+![Kyle's Firefox toolbar: dark palette, compact URL bar, and a blue selected tab with teal underline](assets/kyle-toolbar.png)
+
+- Shared desktop colors: near-black backgrounds, muted blue highlights, and teal accents.
+- Shorter URL bar, with translate, pop-out video, bookmark, and search-selector buttons hidden.
+- Selected tabs have a blue background and teal underline; the pinned-tab glow is removed.
+- Below 700px, tabs and the URL bar use separate rows, with more room for pinned tabs.
+
+See [local setup and upstream update notes](LOCAL.md).
 
 **[Install](https://firnschnee.github.io/FoxOne/installation.html)** | **[Customise](https://firnschnee.github.io/FoxOne/customisation.html)** | **[See it in action](https://firnschnee.github.io/FoxOne/action.html)**
 
